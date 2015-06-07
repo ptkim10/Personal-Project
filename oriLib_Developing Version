@@ -1,0 +1,47 @@
+/**
+ * @oriLib - Android default design
+ *
+ * @author ptkim10
+ */
+ 
+ 	var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
+ 	
+ 	function dip2px(ctx, dips) {
+ return Math.ceil(dips * ctx.getResources().getDisplayMetrics().density);
+ }
+ 	
+ const oriLib = {
+ 	
+ 	    Button : function(location, text, background, do) {
+ 	    	 			var button = new android.widget.Button(ctx);
+ 	    	 			button.setText(text[0]);
+ 	        button.setTextSize(text[1]);
+ 	    	 			button.setTextColor(text[2]);
+ 	    	 			 button.setBackgroundDrawable(background);
+ 	    	 			 button.showAtLocation(location);
+ 	    	 				button.setOnClickListener(new android.view.View.OnClickListener({
+				onClick: function(viewarg) {
+					eval(do);
+					}
+					}));
+				}
+ 	
+    	Text : function(location, text) {
+    		var textView = new android.widget.TextView(ctx);
+    		 textView.showAtLocation(location);
+    		 textView.setText(text[0]);
+    		 textView.setTextSize(text[1]);
+ 	    	 			textView.setTextColor(text[2]);
+    	}
+    	
+    	Image : function(location, path, size) {
+    		//Source
+    	}
+ 	
+ 	
+ }
+ 
+ /**
+  - oriLib
+  
+  */
