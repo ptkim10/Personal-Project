@@ -35,7 +35,13 @@
     	}
     	
     	Image : function(location, path, size) {
-    		//Source
+    		var imageView = new android.widget.ImageView(ctx);
+    		 imageView.setScaleType(android.widget.ImageView.ScaleType.FIT_XY);
+    		 imageView.setImageBitmap(new android.graphics.BitmapFactory.decodeFile(path));
+    		 imageView.setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT));
+    		 imageView.showAtLocation(location);
+    		 imageView.setWidth(dip2px(ctx,size[0]));
+    		 imageView.setHeight(dip2px(ctx,size[1]));
     	}
  	
  	
