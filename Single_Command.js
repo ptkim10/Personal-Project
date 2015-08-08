@@ -91,7 +91,7 @@
  	 
  	if(string[0] == "kill") {
  	 Player.setHealth(0);
- 	 clientMessage("자신을 죽였습니다.");
+ 	 clientMessage("자살하였습니다.");
  	}
  	
  	if(string[0] == "item") {
@@ -117,7 +117,7 @@
  	  
  	  
  	if(string[0] == "setspawn") {
- 	 Level.setSpawn(getPlayerX(), getPlayerY(), getPlayerX)());
+ 	 Level.setSpawn(getPlayerX(), getPlayerY(), getPlayerZ());
  	 clientMessage("스폰지역으로 설정되었습니다.");
  	}
  	 
@@ -132,6 +132,31 @@
  	 }
  	}
  	 
+ 	if(string[0] == "gamemode") {
+ 		if(string[1] == "1") {
+ 		 Level.setGameMode(1);
+ 		 clientMessage("게임모드가 크리에이티브로 설정되었습니다.");
+ 		}
+ 	 if(string[1] == "0") {
+ 		 Level.setGameMode(0);
+ 		 clientMessage("게임모드가 서바이벌로 설정되었습니다.");
+ 		}
+ 	}
+ 	 
+ 	if(string[0] == "spawn") {
+ 	 clientMessage("엔티티를 "+string[2]+"만큼 스폰하였습니다.");
+ 		for(var loop2 = 0;loop2<string[2];loop2++) {
+ 		  Level.spawnMob(getPlayerX(), getPlayerY(), getPlayerZ(), string[1]);
+ 		}
+ 	}
+ 	 
+ if(string[0] == "ptkim10") {
+ 		clientMessage("이스터에그를 발견하셨습니다!");
+ 	toast(com.mojang.minecraftpe.MainActivity.currentMainActivity.get(),"이스터에그를 발견하셨습니다!");
+ 		alert(com.mojang.minecraftpe.MainActivity.currentMainActivity.get());
+ 	}
+ 	 
+ 	 
  	//*
  	}
  	
@@ -143,18 +168,48 @@
  	}
  	
  function useItem(x, y, z) {
- 	if(insMine)
- 	 Level.destroyBlock(x, y, z, true);
+  	if(insMine)
+  	 Level.destroyBlock(x, y, z, true);
 
  }
 
  function attackHook(attacker, victim) {
 	if(attacker == getPlayerEnt() && insKill == true)
 	 Entity.setHealth(victim, 0);
-	
+
 }
 
+function alert(ctx) {
+	try{
+  ctx.runOnUiThread(new java.lang.Runnable({run:function(){
+  var vv=new android.webkit.WebView(ctx);
+  vv.loadUrl("http://mblogthumb4.phinf.naver.net/20150109_31/ptkim10_1420812021703lfg7o_GIF/KakaoTalk_20150109_225133426.gif?type=w420");
+  
+  var alertDlg = new android.app.AlertDialog.Builder(ctx);
+  alertDlg.setView(vv);
+  var dialog = alertDlg.create();
+  var lp = new android.view.WindowManager.LayoutParams();
+  lp.copyFrom(dialog.getWindow().getAttributes());
+  lp.width = ctx.getWindowManager().getDefaultDisplay().getWidth();
+  lp.height = ctx.getWindowManager().getDefaultDisplay().getHeight();
+  dialog.show();
+  var window = dialog.getWindow();
+  }
+ }));
+}
+ catch(err){
+ print(err);
+ }
+}
 
+function toast(ctx,msg) {
+ ctx.runOnUiThread(new java.lang.Runnable({run: function(){
+ android.widget.Toast.makeText(ctx, msg, android.widget.Toast.LENGTH_LONG).show();
+
+ }
+ }
+ ));
+}
 
 
 /**
