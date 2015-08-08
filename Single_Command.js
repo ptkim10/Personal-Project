@@ -1,6 +1,6 @@
 /**
  *
- * @Single Command - Developing version
+ * @Single Command - version 1.0
  *
  *
  *
